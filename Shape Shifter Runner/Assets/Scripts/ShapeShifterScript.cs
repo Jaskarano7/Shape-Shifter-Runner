@@ -9,6 +9,8 @@ public class ShapeShifterScript : MonoBehaviour
     public Transform PlayerTransform;
     public MainDataHolder MeshList;
 
+    public int CurrentPlayerIndex;
+
     private void Start()
     {
 
@@ -17,13 +19,13 @@ public class ShapeShifterScript : MonoBehaviour
     public void ChangeShape(int index)
     {
         //int index = EnumToIndex(item);
-
+        CurrentPlayerIndex = index;
         CurrentMesh.mesh = MeshList.Catagory[0].Items[index].Mesh;
         CurrentCollider.sharedMesh = MeshList.Catagory[0].Items[index].Mesh;
         PlayerTransform.localScale = new Vector3(MeshList.Catagory[0].Items[index].scale, MeshList.Catagory[0].Items[index].scale, MeshList.Catagory[0].Items[index].scale);
     }
 
-    private int EnumToIndex(FoodItem item)
+   /* private int EnumToIndex(FoodItem item)
     {
         switch (item)
         {
@@ -40,7 +42,7 @@ public class ShapeShifterScript : MonoBehaviour
         }
         return -1;
     }
-
+*/
 }
 
 public enum FoodItem

@@ -12,7 +12,7 @@ public class WallScript : MonoBehaviour
     public List<Sprite> GateImages;
     
     public ShapeShifterScript shapeShifterScript;
-    public int CorrectImage;
+    public int CorrectIdex;
     public int first;
     public int second;
 
@@ -37,20 +37,22 @@ public class WallScript : MonoBehaviour
 
         LeftWallImage.sprite = Images[first];
         RightWallImage.sprite = Images[second];
-        CorrectImage = Random.Range(0, 2) == 0 ? first : second;
-        GateImage.sprite = GateImages[CorrectImage];
+        CorrectIdex = Random.Range(0, 2) == 0 ? first : second;
+        GateImage.sprite = GateImages[CorrectIdex];
+        Debug.Log($"Correct Index is : {CorrectIdex}");
     }
 
     private void Update()
     {
-        if(LeftWallEntered)
+        if (LeftWallEntered)
         {
             shapeShifterScript.ChangeShape(first);
+            LeftWallEntered = false;  // reset after applying
         }
         else if (RightWallEntered)
         {
             shapeShifterScript.ChangeShape(second);
+            RightWallEntered = false; // reset after applying
         }
     }
-
 }

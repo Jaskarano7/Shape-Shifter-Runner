@@ -10,14 +10,14 @@ public class GateScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            /*if(ShapeShifterScript.MeshList.Catagory[0].Items[index].Mesh == )
+            if(ShapeShifterScript.CurrentPlayerIndex == WallScript.CorrectIdex)
             {
                 Debug.Log("Pass");
             }
             else
             {
                 Debug.Log("Fail");
-            }*/
+            }
         }
     }
 }
