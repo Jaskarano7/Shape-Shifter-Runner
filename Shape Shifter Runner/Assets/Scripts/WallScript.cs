@@ -12,6 +12,7 @@ public class WallScript : MonoBehaviour
     public List<Sprite> GateImages;
     
     public ShapeShifterScript shapeShifterScript;
+    public PlayerMovement movement;
     public int CorrectIdex;
     public int first;
     public int second;
@@ -26,7 +27,7 @@ public class WallScript : MonoBehaviour
         RightWallEntered = false;
     }
 
-    void SelectRandomItems()
+    public void SelectRandomItems()
     {
         first = Random.Range(0, Images.Count);
         second = Random.Range(0, Images.Count);
