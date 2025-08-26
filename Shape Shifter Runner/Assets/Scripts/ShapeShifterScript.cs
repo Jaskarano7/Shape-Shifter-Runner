@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class ShapeShifterScript : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class ShapeShifterScript : MonoBehaviour
     public MainDataHolder MeshList;
 
     public int CurrentPlayerIndex;
+    public AudioSource audioSource;
+    public AudioClip Correct;
+    public AudioClip Switch;
+    public AudioClip Wrong;
+
+    public ParticleSystem particle;
 
     private void Start()
     {
@@ -18,7 +25,11 @@ public class ShapeShifterScript : MonoBehaviour
 
     public void ChangeShape(int index)
     {
-        //int index = EnumToIndex(item);
+        if(CurrentPlayerIndex != index)
+        {
+            audioSource.PlayOneShot(Switch);
+            particle.Play();
+        }
         CurrentPlayerIndex = index;
         CurrentMesh.mesh = MeshList.Catagory[0].Items[index].Mesh;
         CurrentCollider.sharedMesh = MeshList.Catagory[0].Items[index].Mesh;

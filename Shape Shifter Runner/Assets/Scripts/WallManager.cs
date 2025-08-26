@@ -27,7 +27,6 @@ public class WallManager : MonoBehaviour
     void SpawnWalls()
     {
         int wallCount = Random.Range(minWalls, maxWalls + 1);
-        Debug.Log($"Spawning {wallCount} walls...");
         
         ChangePlatformSize(wallCount);
         
@@ -49,11 +48,8 @@ public class WallManager : MonoBehaviour
         {
             while (i > 0 && wallScripts[i].CorrectIdex == wallScripts[i - 1].CorrectIdex)
             {
-                Debug.Log($"Wall {i} had same as Wall {i - 1}. Re-rolling...");
                 wallScripts[i].SelectRandomItems();
             }
-
-            Debug.Log($"Wall {i} final ans : {wallScripts[i].CorrectIdex}");
         }
     }
 
@@ -76,9 +72,5 @@ public class WallManager : MonoBehaviour
         {
             Debug.LogError("No Renderer found on Platform or its children!");
         }
-
-
-        Debug.Log("Finish moved to: " + FinshPlatform.transform.position);
-
     }
 }

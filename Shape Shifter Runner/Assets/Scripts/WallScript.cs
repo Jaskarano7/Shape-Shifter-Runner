@@ -10,7 +10,7 @@ public class WallScript : MonoBehaviour
 
     public List<Sprite> Images;
     public List<Sprite> GateImages;
-    
+
     public ShapeShifterScript shapeShifterScript;
     public PlayerMovement movement;
     public int CorrectIdex;
@@ -19,6 +19,11 @@ public class WallScript : MonoBehaviour
 
     public bool LeftWallEntered;
     public bool RightWallEntered;
+
+    // Safety
+    private bool hasChangedShape = false;
+    public float changeCooldown = 0.5f; // seconds before another change is allowed
+    private float cooldownTimer = 0f;
 
     private void Start()
     {
@@ -35,25 +40,50 @@ public class WallScript : MonoBehaviour
         if (second == first)
             second = (second + 1) % Images.Count;
 
-
         LeftWallImage.sprite = Images[first];
         RightWallImage.sprite = Images[second];
+
         CorrectIdex = Random.Range(0, 2) == 0 ? first : second;
         GateImage.sprite = GateImages[CorrectIdex];
-        Debug.Log($"Correct Index is : {CorrectIdex}");
+
     }
 
     private void Update()
     {
-        if (LeftWallEntered)
+        // reduce cooldown if active
+        if (hasChangedShape)
         {
-            shapeShifterScript.ChangeShape(first);
-            LeftWallEntered = false;  // reset after applying
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownTimer <= 0f)
+                hasChangedShape = false;
         }
-        else if (RightWallEntered)
+
+        if (!hasChangedShape) // only allow one change per cooldown
         {
-            shapeShifterScript.ChangeShape(second);
-            RightWallEntered = false; // reset after applying
+            if (LeftWallEntered)
+            {
+                shapeShifterScript.ChangeShape(first);
+                LeftWallEntered = false;
+                ActivateCooldown();
+            }
+            else if (RightWallEntered)
+            {
+                shapeShifterScript.ChangeShape(second);
+                RightWallEntered = false;
+                ActivateCooldown();
+            }
         }
+        else
+        {
+            // reset triggers while cooldown active
+            LeftWallEntered = false;
+            RightWallEntered = false;
+        }
+    }
+
+    private void ActivateCooldown()
+    {
+        hasChangedShape = true;
+        cooldownTimer = changeCooldown;
     }
 }

@@ -12,52 +12,57 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 lastPos;
     private bool dragging = false;
-    private bool isMovingForward = false;
+    public bool isMovingForward = false;
+    public bool moveSideways = false;
 
     private void Start()
     {
         isMovingForward = true;
+        moveSideways = true;
     }
 
 
     void Update()
     {
-        // --- Touch Input (Mobile) ---
-        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+        if (moveSideways)
         {
-            Vector2 currentPos = Touchscreen.current.primaryTouch.position.ReadValue();
+            // --- Touch Input (Mobile) ---
+            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+            {
+                Vector2 currentPos = Touchscreen.current.primaryTouch.position.ReadValue();
 
-            if (Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
-            {
-                lastPos = currentPos;
-            }
-            else
-            {
-                Vector2 delta = currentPos - lastPos;
-                lastPos = currentPos;
+                if (Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+                {
+                    lastPos = currentPos;
+                }
+                else
+                {
+                    Vector2 delta = currentPos - lastPos;
+                    lastPos = currentPos;
 
-                MovePlayer(delta);
+                    MovePlayer(delta);
+                }
             }
-        }
-        // --- Mouse Input (Editor Debug) ---
-        else if (Mouse.current != null)
-        {
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            // --- Mouse Input (Editor Debug) ---
+            else if (Mouse.current != null)
             {
-                lastPos = Mouse.current.position.ReadValue();
-                dragging = true;
-            }
-            else if (Mouse.current.leftButton.isPressed && dragging)
-            {
-                Vector2 currentPos = Mouse.current.position.ReadValue();
-                Vector2 delta = currentPos - lastPos;
-                lastPos = currentPos;
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                {
+                    lastPos = Mouse.current.position.ReadValue();
+                    dragging = true;
+                }
+                else if (Mouse.current.leftButton.isPressed && dragging)
+                {
+                    Vector2 currentPos = Mouse.current.position.ReadValue();
+                    Vector2 delta = currentPos - lastPos;
+                    lastPos = currentPos;
 
-                MovePlayer(delta);
-            }
-            else if (Mouse.current.leftButton.wasReleasedThisFrame)
-            {
-                dragging = false;
+                    MovePlayer(delta);
+                }
+                else if (Mouse.current.leftButton.wasReleasedThisFrame)
+                {
+                    dragging = false;
+                }
             }
         }
 
