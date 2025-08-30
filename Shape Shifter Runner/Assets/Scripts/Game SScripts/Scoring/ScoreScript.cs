@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScoreScript : MonoBehaviour
@@ -6,9 +7,9 @@ public class ScoreScript : MonoBehaviour
     [Header("Script Reference")]
     [SerializeField] private PlayerMovement movement;
     [SerializeField] private CameraFollow cameraFollow;
-    
-    private float distanceMultiplier;
-    private float ScoreMultiplyer;
+
+    [SerializeField] private float distanceMultiplier;
+    [SerializeField] private float ScoreMultiplyer;
     
     private int points;
     private int totalQue;
@@ -29,7 +30,7 @@ public class ScoreScript : MonoBehaviour
             StartCoroutine(MoveForwardBySpeed(movement.GetCurrentSpeed()));
             
             cameraFollow.moveDuration = 2;
-            cameraFollow.moveToScore();
+            cameraFollow.MoveToScore();
             points = CalculatePoints();
             Debug.Log("Points "+ points);
         }
@@ -37,6 +38,7 @@ public class ScoreScript : MonoBehaviour
 
     private IEnumerator MoveForwardBySpeed(float speed)
     {
+        Debug.Log(speed);
         movement.isMovingForward = true;
         movement.moveSideways = false;
 
@@ -74,4 +76,13 @@ public class ScoreScript : MonoBehaviour
         correctAns++;
     }
 
+    public int GetPoint()
+    {
+        return points;
+    }
+
+    public float GetMul()
+    {
+        return ScoreMultiplyer;
+    }
 }

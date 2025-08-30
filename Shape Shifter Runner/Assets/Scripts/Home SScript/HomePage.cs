@@ -1,12 +1,22 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HomePage : MonoBehaviour
 {
     [SerializeField] private MeshFilter currentMesh;
-    public List<Mesh> meshes;
+    [SerializeField] private List<Mesh> meshes;
 
     private int currentIndex = 0;
+
+    [SerializeField] private Button PlayBt;
+    [SerializeField] private Button SettingsBt;
+
+    private void Start()
+    {
+        PlayBt.onClick.AddListener(PlayGame);
+    }
 
     public void NextMesh()
     {
@@ -18,5 +28,10 @@ public class HomePage : MonoBehaviour
             currentIndex = 0;
 
         currentMesh.mesh = meshes[currentIndex];
+    }
+
+    void PlayGame()
+    {
+        SceneManager.LoadScene("Game Scene");
     }
 }

@@ -6,6 +6,8 @@ public class CameraFollow : MonoBehaviour
     
     [Header("Script Ref")]
     [SerializeField] private PlayerMovement movement;
+    [SerializeField] private UiManager uiManager;
+    [SerializeField] private ScoreScript scoreScript;
 
     [Header("Start Pos/Rot")]
     public Vector3 startPos;
@@ -18,11 +20,6 @@ public class CameraFollow : MonoBehaviour
     private float timer;
     private bool isMoving = false;
     private bool setForwardOnComplete = true;
-
-    private void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -46,6 +43,7 @@ public class CameraFollow : MonoBehaviour
                 {
                     movement.isMovingForward = false;
                     movement.moveSideways = false;
+                    uiManager.SetPoints(scoreScript.GetPoint(), scoreScript.GetMul(), scoreScript.GetPoint() * scoreScript.GetMul());
                 }
             }
         }
@@ -65,12 +63,12 @@ public class CameraFollow : MonoBehaviour
         setForwardOnComplete = forwardOnComplete;
     }
 
-    public void moveToStart()
+    public void MoveToStart()
     {
         MoveTo(targetPos, targetRot, true);
     }
 
-    public void moveToScore()
+    public void MoveToScore()
     {
         MoveTo(startPos,startRot, false);
     }

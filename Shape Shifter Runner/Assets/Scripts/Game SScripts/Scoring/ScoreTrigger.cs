@@ -3,11 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class ScoreTrigger : MonoBehaviour
 {
+    [Header("Script Ref")]
     [SerializeField] private ScoreScript scoreScript;
+    [SerializeField] private ShapeShifterScript shapeShifter;
+
+    [Header("Material Ref")]
     [SerializeField] private  MeshRenderer MeshRenderer;
     [SerializeField] private Material ColourMaterial;
 
-    private float scoreMultiplier = 1;
+    [SerializeField] private float scoreMultiplier = 1;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,6 +20,7 @@ public class ScoreTrigger : MonoBehaviour
             scoreScript.SetScoreMultiplyer(scoreMultiplier);
             MeshRenderer.material = ColourMaterial;
             Debug.Log($"Player hit {scoreMultiplier}x zone!");
+            //shapeShifter.PlayCorrectSound();
         }
     }
 }

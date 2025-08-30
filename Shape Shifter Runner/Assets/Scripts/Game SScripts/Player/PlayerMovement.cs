@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform playerParent;
 
     [HideInInspector] public bool isMovingForward = false;
-    [HideInInspector] public bool moveSideways = false;
+    [HideInInspector] public bool moveSideways = true;
     
     private Vector2 lastPos;
     private bool dragging = false;
