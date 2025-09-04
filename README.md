@@ -6,11 +6,8 @@ The core idea: simple mechanics, addictive gameplay, and endless replayability.
 
 ✨ Features :-
 1) Procedural map generation – every run feels different
-
 2) Shape-shifting mechanics – adapt to survive
-
 3) Dynamic speed system – rewards correct choices, punishes mistakes
-
 4) Smooth mobile-friendly controls – optimized for touch input
 
 📌 Current Theme
