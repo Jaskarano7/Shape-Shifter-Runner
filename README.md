@@ -17,14 +17,14 @@ The core idea: simple mechanics, addictive gameplay, and endless replayability.
 Fast Food Mode 🍕🍩🍔
 
 🚀 Future Plans
-Add new game modes (Vehicles, Animals, and more)
-Additional polish and optimization for mobile devices
-Publish on the Google Play Store
+1) Add new game modes (Vehicles, Animals, and more)
+2) Additional polish and optimization for mobile devices
+3) Publish on the Google Play Store
 
 🛠️ Tech Stack
-Engine: Unity
-Language: C#
-Platform: Mobile (Android)
+1) Engine: Unity
+2) Language: C#
+3) Platform: Mobile (Android)
 
 🤝 Contributing
 This is a solo dev project for now, but I’m open to suggestions and feedback.
